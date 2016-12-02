@@ -63,3 +63,58 @@ function palindromePermutation(str) {
   //more than 1 odd count will result in false
   return oddCount > 1 ? false : true;
 }
+
+//1.5 One Away
+
+function oneAway(str1, str2) {
+
+  if(Math.abs(str1.length - str2.length) > 1) {
+    return false;
+  }
+  
+  let s1 = str1.length > str2.length ? str1 : str2;
+  let s2 = str1.length > str2.length ? str2 : str1;
+  
+  let idx1 = 0;
+  let idx2 = 0;
+  let difference = false
+
+  while (idx1 < s1.length && idx2 < s2.length) {
+    if (s1[idx1] !== s2[idx2]) {
+     
+      if (difference) {
+        return false;
+      }
+      difference = true;
+      
+      if (s1.length === s2.length) {
+        idx1++;
+      }
+
+    } else {
+      idx1++;
+    }
+    idx2++;
+  }
+  
+  return true;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
