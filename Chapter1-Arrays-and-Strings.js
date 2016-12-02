@@ -101,6 +101,26 @@ function oneAway(str1, str2) {
 }
 
 
+//1.6 String Compression
+
+function stringCompression(str) {
+  let holder = [];
+  let currentCount = 0;
+  
+  for (let i = 0; i < str.length; i++) {
+    currentCount++;
+    
+    if (str[i] !== str[i+1]) {
+      holder.push(str[i]);
+      holder.push(currentCount);
+      currentCount = 0
+    }
+  }
+  
+  let newStr = holder.join('');
+  
+  return str.length < newStr.length ? str : newStr;
+}
 
 
 
