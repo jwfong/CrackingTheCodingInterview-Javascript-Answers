@@ -30,3 +30,36 @@ function checkPermutation(str1, str2) {
   }
   return true;
 }
+
+//1.3 URLify
+
+function URLify(str) {
+  return str.trim().split(' ').join('%20')
+}
+
+//1.4 Palindrome Permutation
+
+function palindromePermutation(str) {
+  str = str.toLowerCase().split(' ').join('');
+  let count = [];
+  let oddCount = 0; 
+  
+  //get count of unique letters 
+  for (let letter of str) {
+    if (count[letter]) {
+      count[letter]++;
+    } else {
+      count[letter] = 1;
+    }
+  }
+  //check count of letter frequencies
+  for (let item in count) {
+    if (count[item] % 2 === 0) {
+      continue;
+    } else {
+      oddCount++;
+    }
+  }
+  //more than 1 odd count will result in false
+  return oddCount > 1 ? false : true;
+}
