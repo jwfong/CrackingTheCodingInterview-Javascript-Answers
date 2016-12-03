@@ -123,6 +123,63 @@ function stringCompression(str) {
 }
 
 
+//1.7 Rotate Matrix
+
+function rotateMatrix(arr) {
+  if(arr.length < 2) {
+    return arr;
+  }
+
+  let newMatrix = [];
+  let count = 0;
+  let length = arr.length;
+
+  while (count < length) {
+    let tempArr = [];
+    for (let i = length-1; i >= 0; i--) {
+      tempArr.push(arr[i][count]);
+    }
+    count++;
+    newMatrix.push(tempArr);
+  }
+
+  return newMatrix;
+}
+
+// Rotate matrix in place - constant space;
+function rotateMatrixInPlace(matrix) {
+  if (matrix.length < 2 || matrix.length !== matrix[0].length) {
+    return null;
+  }
+
+  let length = matrix.length;
+
+  for (let layer = 0; layer < length/2; layer++) {
+    let first = layer;
+    let last = length - 1 - layer;
+
+    for (let i = first; i < last; i++) {
+      let offset = i - first;
+      let top = matrix[first][i];
+      matrix[first][i] = matrix[last-offset][first];
+      matrix[last-offset][first] = matrix[last][last-offset];
+      matrix[last][last-offset] = matrix[i][last];
+      matrix[i][last] = top;
+    }
+  }
+  return matrix;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
