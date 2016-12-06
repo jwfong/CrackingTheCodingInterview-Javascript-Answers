@@ -171,6 +171,56 @@ function rotateMatrixInPlace(matrix) {
 }
 
 
+//1.8 Zero Matrix;
+
+function zeroMatrix(matrix) {
+  let rows = [];
+  let columns = [];
+
+  //find the rows and the columns that contain zeros
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      if (matrix[i][j] === 0) {
+        if (rows[i] === undefined) {
+         rows[i] = true;
+         columns[j] = true;
+        }
+      }
+    }
+  }
+  
+  // set rows that contain zeros to zero
+  for (let i = 0; i < rows.length; i++) {
+    if (rows[i]) {
+      nullifyRow(matrix, i);
+    }
+  }
+  
+  //let columns that contain zeros to zero
+  for (let j = 0; j < columns.length; j++) {
+    if (columns[j]) {
+      nullifyColumn(matrix, j);
+    }
+  }
+  
+  
+  function nullifyRow(matrix, row) {
+    for (let j = 0; j < matrix[0].length; j++) {
+      matrix[row][j] = 0
+    }
+  }
+  
+  function nullifyColumn(matrix, column) {
+    for (let i = 0; i < matrix[0].length; i++) {
+      matrix[i][column] = 0
+    }
+  }
+
+  return matrix;
+}
+
+// that was stupidly annoying....
+
 
 
 
