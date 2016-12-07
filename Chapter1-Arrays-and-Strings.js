@@ -221,7 +221,24 @@ function zeroMatrix(matrix) {
 
 // that was stupidly annoying....
 
+//1.9 String rotation
 
+function stringRotation(str1, str2) {
+  if (str1.length !== str2.length) {
+    return false;
+  }
+  //find position of the first letter of the first string in string 2
+  let start = str1[0];
+  let findIdx = str2.indexOf(start);
+
+  //take last half of string in relation to the index
+  let subStrStart = str2.slice(findIdx);
+  //take first half of string in relation to the index
+  let subStrEnd = str2.slice(0, findIdx);
+  
+  //concatenate string and check against first string
+  return subStrStart + subStrEnd === str1 ? true : false;
+}
 
 
 
