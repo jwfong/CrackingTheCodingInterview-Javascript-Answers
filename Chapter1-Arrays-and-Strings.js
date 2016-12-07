@@ -221,7 +221,7 @@ function zeroMatrix(matrix) {
 
 // that was stupidly annoying....
 
-//1.9 String rotation
+//1.9 String rotation -- does not use isSubstring but I believe the logic is about the same
 
 function stringRotation(str1, str2) {
   if (str1.length !== str2.length) {
