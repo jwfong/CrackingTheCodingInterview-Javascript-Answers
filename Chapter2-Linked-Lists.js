@@ -133,10 +133,12 @@ LinkedList.prototype.deleteMiddleNode = function() {
 
 LinkedList.prototype.partition = function(val) {
   let node = this.head;
-
+  
+  //create two new linked lists
   let lowerHalf = new LinkedList;
   let higherHalf = new LinkedList;
-
+  
+  //go though LL and separate values smaller than val and larger than val;
   while (node !== null) {
     if (node.value < val) {
       lowerHalf.addToTail(node.value);
@@ -147,13 +149,59 @@ LinkedList.prototype.partition = function(val) {
     node = node.next;
   }
   
+  //point lowerHalf tail to the head of the higherHalf linked list
   lowerHalf.tail.next = higherHalf.head;
+  //maintain the same size
   lowerHalf.size = this.size;
+  //reassign the tail
   lowerHalf.tail = higherHalf.tail;
-  
+
   return lowerHalf;
 
 }
+
+// 2.5 Sum Lists 
+let sumLists = function(list1, list2) {
+
+  let getSequenceReversed = function(list) {
+    let arr = []; 
+    
+    let node = list.head;
+    let size = list.size;
+
+    while (size > 0) {
+      arr[size - 1] = node.value;
+      size--;
+      node = node.next;
+    }
+
+    return Number(arr.join(''));
+  };
+
+  return getSequenceReversed(list1) + getSequenceReversed(list2);
+}
+
+// For forward order  replace getSequenceReversed function with function below;
+
+// let getSequence = function(list) {
+//   let arr = [];
+//   let node = list.head;
+//   let size = list.size;
+//   let count = 0;
+
+//   while (count < size) {
+//     arr.push(node.value);
+//     count++;
+//     node = node.next; 
+//   }
+
+//   return Number(arr.join(''));
+// }
+
+
+
+
+
 
 let Node = function(value) {
   let node = {};
@@ -163,22 +211,16 @@ let Node = function(value) {
   return node;
 }
 
-let newLL = new LinkedList();
-
-newLL.addToTail(1);
-newLL.addToTail(2);
-newLL.addToTail(10);
-newLL.addToTail(3);
-newLL.addToTail(4);
-newLL.addToTail(1);
-newLL.addToTail(11);
-newLL.addToTail(100);
-newLL.addToTail(12);
-newLL.addToTail(5);
-newLL.addToTail(6);
-newLL.addToTail(7);
-newLL.addToTail(8);
-newLL.addToTail(2);
-newLL.addToTail(9);
+let L1 = new LinkedList();
+let L2 = new LinkedList();
 
 
+L1.addToTail(1);
+L1.addToTail(2);
+L1.addToTail(3);
+
+L2.addToTail(3);
+L2.addToTail(2);
+L2.addToTail(1);
+
+console.log(sumLists(L1, L2));
