@@ -271,7 +271,7 @@ LinkedList.prototype.isPalindrome3 = function() {
   let node = this.head;
   let p = isPalindromeRecurse(this.head, length);
 
-  return p;
+  return p.result;
 }
 
 function isPalindromeRecurse(head, size) {
@@ -288,13 +288,12 @@ function isPalindromeRecurse(head, size) {
   }
 
   res.result = (head.value === res.node.value);
-
   res.node = res.node.next;
 
   return res;
 }
 
-let Result = function(currentHead, check) {
+function Result(currentHead, check) {
   let obj = {};
   obj.node = currentHead;
   obj.result = check;
@@ -302,8 +301,40 @@ let Result = function(currentHead, check) {
   return obj;
 }
 
+// 2.7 Intersection // not yet tested
+function hasIntersection(list1, list2) {  
+
+  let longer = list1.size < list2.size ? list2 : list1;
+  let shorter = list1.size < list2.size ? list1 : list2;
+  //check the tails by reference and not by value
+  if (list1.tail !== list2.tail) {
+    return false;
+  }
+
+  longer = getKthNode(longer, Math.abs(longer.size - shorter.size))
+  
+  while (shorter.head !== longer.head) {
+    shorter = shorter.next;
+    longer = longer.next
+  }
+  
+  return longer; //or shorter
+}
+
+function getKthNode = function(LL, k) {
+  let node = LL.head;
+
+  while (k > 0 && node !== null) {
+    node = node.next;
+    k--;
+  }
+
+  return node;
+}
 
 
+
+// used to create new node objects
 let Node = function(value) {
   let node = {};
   node.value = value;
@@ -318,7 +349,7 @@ let L1 = new LinkedList();
 
 L1.addToTail(1);
 L1.addToTail(2);
-L1.addToTail(2);
+L1.addToTail(3);
 L1.addToTail(4);
 L1.addToTail(5);
 L1.addToTail(6);
