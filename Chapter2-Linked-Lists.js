@@ -32,9 +32,10 @@ LinkedList.prototype.removeHead = function() {
   //decrease size whenever head is removed
   this.size--;
 
-  
   return currentHead.value;
 };
+
+
 
 LinkedList.prototype.contains = function (target) {
   let node = this.head;
@@ -49,8 +50,15 @@ LinkedList.prototype.contains = function (target) {
   return false;
 };
 
-//2.1 Remove Duplicates 
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
+
+//2.1 Remove Duplicates 
 LinkedList.prototype.removeDuplicates = function() {
   let node = this.head;
   let previousNode = null;
@@ -59,6 +67,7 @@ LinkedList.prototype.removeDuplicates = function() {
   while (node !== null) {
     if (uniqueVals.has(node.value)) {
       previousNode.next = node.next;
+      this.size--;
     } else {
       uniqueVals.add(node.value);
       previousNode = node;
@@ -66,8 +75,11 @@ LinkedList.prototype.removeDuplicates = function() {
     node = node.next;
   }
   
-  return uniqueVals.values();
+  return this;
 }
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 
 //2.1 Return Kth to Last O(n) time O(n) space
@@ -96,6 +108,11 @@ LinkedList.prototype.kthToLast = function(k) {
 
   // return node.value;
 }
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+
 
 // 2.3 Delete Middle Node
 // added size property to linked list
@@ -129,9 +146,12 @@ LinkedList.prototype.deleteMiddleNode = function() {
 //     node = node.next;
 //   }
 // }
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
 
 // 2.4 Partition 
-
 LinkedList.prototype.partition = function(val) {
   let node = this.head;
   
@@ -158,8 +178,11 @@ LinkedList.prototype.partition = function(val) {
   lowerHalf.tail = higherHalf.tail;
 
   return lowerHalf;
-
 }
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
 
 // 2.5 Sum Lists 
 let sumLists = function(list1, list2) {
@@ -206,6 +229,10 @@ let sumLists = function(list1, list2) {
 
 //   return Number(arr.join(''));
 // }
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
 
 // 2.6.1 Palindrome - reverse and compare
 LinkedList.prototype.isPalindrome1 = function() {
@@ -236,6 +263,10 @@ let isEqual = function(list1, list2) {
   }
   return list1 === null && list2 === null;
 }
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
 
 // 2.6.2 Palindrome - iterative approach w/ a stack
 LinkedList.prototype.isPalindrome2 = function() {
@@ -264,6 +295,10 @@ LinkedList.prototype.isPalindrome2 = function() {
 
   return true;
 }
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
 
 //2.6.3 Palindrome FUCKING RECURSIVE APPROACH 
 LinkedList.prototype.isPalindrome3 = function() {
@@ -300,12 +335,17 @@ function Result(currentHead, check) {
   
   return obj;
 }
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 // 2.7 Intersection // not yet tested
-function hasIntersection(list1, list2) {  
+function hasIntersection(list1, list2) {
+  let head1 = list1.head;
+  let head2 = list2.head;  
 
-  let longer = list1.size < list2.size ? list2 : list1;
-  let shorter = list1.size < list2.size ? list1 : list2;
+  let longer = list1.size < list2.size ? head2 : head1;
+  let shorter = list1.size < list2.size ? head1 : head2;
   //check the tails by reference and not by value
   if (list1.tail !== list2.tail) {
     return false;
@@ -321,8 +361,8 @@ function hasIntersection(list1, list2) {
   return longer; //or shorter
 }
 
-function getKthNode = function(LL, k) {
-  let node = LL.head;
+function getKthNode(LL, k) {
+  let node = LL;
 
   while (k > 0 && node !== null) {
     node = node.next;
@@ -330,6 +370,38 @@ function getKthNode = function(LL, k) {
   }
 
   return node;
+}
+
+
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+LinkedList.prototype.loopDetection = function() {
+  let slower = this.head;
+  let faster = this.head;
+
+  while (faster !== null || faster.next !== null) {
+    slower = slower.next;
+    faster = faster.next.next
+
+    if (slower === faster) {
+      break; 
+    }
+  }
+
+  if (faster === null || faster.next === null) {
+    return null;
+  }
+  
+  slower = this.head;
+
+  while (slower !== faster) {
+    slower = slower.next;
+    faster = faster.next;
+  }
+  
+  return faster;
 }
 
 
