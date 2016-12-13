@@ -178,7 +178,15 @@ let sumLists = function(list1, list2) {
     return Number(arr.join(''));
   };
 
-  return getSequenceReversed(list1) + getSequenceReversed(list2);
+  let sum = getSequenceReversed(list1) + getSequenceReversed(list2);
+  let sumStr = sum.toString().split('');
+  
+  let sumsLL = new LinkedList;
+  for (let i = sumStr.length - 1; i >= 0; i--) {
+    sumsLL.addToTail(sumStr[i]);
+  }
+
+  return sumsLL;
 }
 
 // For forward order  replace getSequenceReversed function with function below;
@@ -215,12 +223,12 @@ let L1 = new LinkedList();
 let L2 = new LinkedList();
 
 
-L1.addToTail(1);
-L1.addToTail(2);
-L1.addToTail(3);
+L1.addToTail(9);
+L1.addToTail(8);
+L1.addToTail(7);
 
-L2.addToTail(3);
-L2.addToTail(2);
-L2.addToTail(1);
+L2.addToTail(6);
+L2.addToTail(8);
+L2.addToTail(5);
 
 console.log(sumLists(L1, L2));
