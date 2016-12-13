@@ -241,15 +241,14 @@ let isEqual = function(list1, list2) {
 LinkedList.prototype.isPalindrome2 = function() {
   let fast = this.head;
   let slow = this.head;
-
   let stack = [];
-
+  
   while (fast !== null & slow !== null) {
     stack.push(slow.value);
     slow = slow.next;
     fast = fast.next.next;
   }
-
+  //if the LL has an odd number of nodes, skipped the middle value
   if (fast !== null) {
     slow = slow.next;
   }
@@ -262,10 +261,46 @@ LinkedList.prototype.isPalindrome2 = function() {
     }
     slow = slow.next;
   }
+
   return true;
 }
 
+//2.6.3 Palindrome FUCKING RECURSIVE APPROACH 
+LinkedList.prototype.isPalindrome3 = function() {
+  let length = this.size;
+  let node = this.head;
+  let p = isPalindromeRecurse(this.head, length);
 
+  return p;
+}
+
+function isPalindromeRecurse(head, size) {
+  if (head === null || size <= 0) {
+    return new Result(head, true);
+  } else if (size === 1) {
+    return new Result(head.next, true);
+  }
+
+  let res = isPalindromeRecurse(head.next, size - 2);
+
+  if (!res.result || res.node === null) {
+    return res;
+  }
+
+  res.result = (head.value === res.node.value);
+
+  res.node = res.node.next;
+
+  return res;
+}
+
+let Result = function(currentHead, check) {
+  let obj = {};
+  obj.node = currentHead;
+  obj.result = check;
+  
+  return obj;
+}
 
 
 
@@ -283,8 +318,12 @@ let L1 = new LinkedList();
 
 L1.addToTail(1);
 L1.addToTail(2);
-L1.addToTail(3);
+L1.addToTail(2);
+L1.addToTail(4);
+L1.addToTail(5);
+L1.addToTail(6);
+L1.addToTail(5);
+L1.addToTail(4);
 L1.addToTail(3);
 L1.addToTail(2);
 L1.addToTail(1);
-
