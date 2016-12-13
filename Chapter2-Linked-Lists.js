@@ -1,4 +1,4 @@
-let LinkedList = function() {
+function LinkedList() {
   this.head = null;
   this.tail = null;
   //added before 2.3
@@ -20,6 +20,7 @@ LinkedList.prototype.addToTail = function(value) {
 
   this.tail = newTail;
 };
+
 
 LinkedList.prototype.removeHead = function() {
   if (this.head === null) {
@@ -206,6 +207,63 @@ let sumLists = function(list1, list2) {
 //   return Number(arr.join(''));
 // }
 
+// 2.6.1 Palindrome - reverse and compare
+LinkedList.prototype.isPalindrome1 = function() {
+  let node = this.head;
+  let reversed = reverseAndClone(node);
+  return isEqual(node, reversed)
+}
+
+let reverseAndClone = function(inputLL) {
+  let node = inputLL;
+  let head = null;
+  while (node !== null) {
+    let n = Node(node.value);
+    n.next = head;
+    head = n;
+    node = node.next;
+  }
+  return head;
+}
+
+let isEqual = function(list1, list2) {
+  while (list1 !== null && list2 !== null) {
+    if (list1.value !== list2.value) {
+      return false;
+    }
+    list1 = list1.next;
+    list2 = list2.next;
+  }
+  return list1 === null && list2 === null;
+}
+
+// 2.6.2 Palindrome - iterative approach w/ a stack
+LinkedList.prototype.isPalindrome2 = function() {
+  let fast = this.head;
+  let slow = this.head;
+
+  let stack = [];
+
+  while (fast !== null & slow !== null) {
+    stack.push(slow.value);
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+
+  if (fast !== null) {
+    slow = slow.next;
+  }
+
+  while (slow !== null) {
+    let popped = stack.pop();
+    console.log(popped);
+    if (popped !== slow.value) {
+      return false;
+    }
+    slow = slow.next;
+  }
+  return true;
+}
 
 
 
@@ -220,15 +278,13 @@ let Node = function(value) {
 }
 
 let L1 = new LinkedList();
-let L2 = new LinkedList();
 
 
-L1.addToTail(9);
-L1.addToTail(8);
-L1.addToTail(7);
 
-L2.addToTail(6);
-L2.addToTail(8);
-L2.addToTail(5);
+L1.addToTail(1);
+L1.addToTail(2);
+L1.addToTail(3);
+L1.addToTail(3);
+L1.addToTail(2);
+L1.addToTail(1);
 
-console.log(sumLists(L1, L2));
