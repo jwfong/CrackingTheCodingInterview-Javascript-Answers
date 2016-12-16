@@ -88,7 +88,6 @@ Queue.prototype.isEmpty = function() {
 // queue.add(6);
 
 // 3.1 Three in one
-
 function TripleStack() {
   this._array = [];
   this._lengths=[0, 0, 0];
@@ -131,6 +130,39 @@ TripleStack.prototype.isEmpty = function(stack) {
 }
 
 
+function StackMin() {
+  this._storage = {};
+  this._size = 0;
+
+}
+
+StackMin.prototype.push = function(value) {
+  let min = this.min();
+
+
+  this._storage[this._size] = {
+    value: value,
+    min: Math.min(min !== undefined ? min : Number.POSITIVE_INFINITY, value);
+  }
+  this._size++
+};
+
+StackMin.prototype.pop = function() {
+  if (this._size === 0) {
+    return null;
+  } 
+  this._size--;
+  let temp = this._storage[this._size];
+  delete this._storage[this._size];
+  return temp;
+};
+
+StackMin.prototype.min = function() {
+  if (!this.isEmpty) {
+    let item = this._storage[this._size-1];
+    return item.min;
+  }
+};
 
 
 
